@@ -16,6 +16,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap"
+					rel="stylesheet"
+				></link>
+			</head>
 			<body className={`dark ${inter.className}`}>{children}</body>
 		</html>
 	);
