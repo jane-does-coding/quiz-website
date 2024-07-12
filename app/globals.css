@@ -7,3 +7,9 @@
 .sixcaps {
 	font-family: "Six Caps";
 }
+
+.char {
+	transform: translateY(15%) scale(0.5);
+	opacity: 0;
+	transition: transform 0.5s;
+}
