@@ -14,7 +14,7 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer";
 
-export function DrawerDemo() {
+export function DrawerComponent() {
 	const [goal, setGoal] = React.useState(350);
 
 	function onClick(adjustment: number) {
