@@ -39,33 +39,6 @@ export default function Home() {
 				className="text-[1.5rem]"
 				text={"A great website for students studiying medicine!"}
 			/>
-
-			<AnimatedTextWord
-				className="text-[1.5rem]"
-				text={"A great website for students studiying medicine!"}
-			/>
-
-			<AnimatedTextWord
-				className="text-[1.5rem]"
-				text={"A great website for students studiying medicine!"}
-			/>
-			<h1
-				id="banner-text"
-				className="text-mask bg-clip-text text-transparent text-[40rem] sixcaps m-0 mb-[4rem] tracking-[-1rem] leading-[40rem] font-extrabold"
-				style={{
-					backgroundImage: "url(/banner.jpg)",
-					backgroundSize: "cover",
-					backgroundRepeat: "no-repeat",
-					backgroundPosition: "center",
-					transform: "scale(0.8, 1.1)",
-				}}
-			>
-				STUDY BETTER
-			</h1>
-			<AnimatedTextWord
-				className="text-[1.5rem]"
-				text={"A great website for students studiying medicine!"}
-			/>
 		</div>
 	);
 }

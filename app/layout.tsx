@@ -24,8 +24,13 @@ export default function RootLayout({
 					href="https://fonts.googleapis.com/css2?family=Six+Caps&display=swap"
 					rel="stylesheet"
 				></link>
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link
+					href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap"
+					rel="stylesheet"
+				></link>
 			</head>
-			<body className={`dark ${inter.className}`}>
+			<body className={`light ${inter.className}`}>
 				<Navbar />
 				{children}
 			</body>

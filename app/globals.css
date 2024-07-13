@@ -8,6 +8,10 @@
 	font-family: "Six Caps";
 }
 
+.jura {
+	font-family: "Jura";
+}
+
 .char {
 	transform: translateY(15%) scale(0.5);
 	opacity: 0;
