@@ -12,11 +12,9 @@ const Navbar = () => {
 			animate={{ y: 0, opacity: 1 }}
 			transition={{ duration: 0.3, delay: 0.75, ease: "easeOut" }}
 		>
-			<div className="w-[50%] mx-auto flex justify-between items-center">
+			<div className="w-full flex items-center justify-center">
 				{/* ADD JURA FONT */}
 				<NavComponent />
-
-				<DrawerComponent />
 			</div>
 		</motion.div>
 	);

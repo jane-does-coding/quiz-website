@@ -13,6 +13,7 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { DrawerComponent } from "./Drawer";
 
 const components: { title: string; href: string; description: string }[] = [
 	{
@@ -54,10 +55,10 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function NavComponent() {
 	return (
-		<NavigationMenu>
-			<NavigationMenuList className="justify-between w-full flex items-center ">
+		<NavigationMenu className="w-fit flex items-center justify-between">
+			<NavigationMenuList className="justify-between  flex items-center gap-12">
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="jura font-bold transition-all hover:scale-[0.9] text-[1.25rem]">
+					<NavigationMenuTrigger className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]">
 						Quizzes
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
@@ -128,6 +129,9 @@ export function NavComponent() {
 							))}
 						</ul>
 					</NavigationMenuContent>
+				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<DrawerComponent />
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>
