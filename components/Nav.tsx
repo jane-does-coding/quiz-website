@@ -14,6 +14,7 @@ import {
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { DrawerComponent } from "./Drawer";
+import { useRouter } from "next/navigation";
 
 const components: { title: string; href: string; description: string }[] = [
 	{
@@ -54,11 +55,16 @@ const components: { title: string; href: string; description: string }[] = [
 ];
 
 export function NavComponent() {
+	const router = useRouter();
+
 	return (
 		<NavigationMenu className="w-fit flex items-center justify-between">
 			<NavigationMenuList className="justify-between  flex items-center gap-12">
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]">
+					<NavigationMenuTrigger
+						onClick={() => router.push("/quizzes")}
+						className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]"
+					>
 						Quizzes
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
@@ -66,18 +72,17 @@ export function NavComponent() {
 							<li className="row-span-3 overflow-hidden">
 								<NavigationMenuLink asChild>
 									<a
-										className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+										className="flex h-full w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
 										href="/"
 									>
 										{/* 										<Icons.logo className="h-6 w-6" />
 										 */}{" "}
 										<div className="mb-2 mt-4 text-lg font-medium">
-											shadcn/ui
+											Find Quizzes
 										</div>
 										<p className="text-sm leading-tight text-muted-foreground">
-											Beautifully designed components that you can copy and
-											paste into your apps. Accessible. Customizable. Open
-											Source.
+											Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+											Dolorum, quae.
 										</p>
 									</a>
 								</NavigationMenuLink>
@@ -95,7 +100,10 @@ export function NavComponent() {
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]">
+					<NavigationMenuTrigger
+						onClick={() => router.push("/learn")}
+						className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]"
+					>
 						Learn
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
@@ -113,7 +121,10 @@ export function NavComponent() {
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
-					<NavigationMenuTrigger className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]">
+					<NavigationMenuTrigger
+						onClick={() => router.push("/tools")}
+						className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem]"
+					>
 						Tools
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
