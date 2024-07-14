@@ -7,8 +7,9 @@ import {
 	CardHeader,
 	CardTitle,
 } from "../ui/card";
+import AllCardsGrid from "../Landing/AllCardsGrid";
 
-const Tools = () => {
+const Tools = ({ tools }: any) => {
 	return (
 		<div>
 			<div className="flex flex-col items-center justify-center min-h-[60vh] pt-[10vh] m-0">
@@ -32,158 +33,7 @@ const Tools = () => {
 				/>
 			</div>
 			{/* TURN INTO SEPERATE COMPONENT */}
-			<div className="grid grid-cols-3 gap-4 w-[90vw] mx-auto">
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-				<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
-					<CardHeader>
-						<CardTitle className="jura">Study</CardTitle>
-						<CardDescription>
-							Resources to study different topics
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="grid gap-4">
-						<img
-							src="/banner.jpg"
-							className="w-full aspect-[3/2] object-fit rounded-[0.5rem]"
-							alt=""
-						/>
-					</CardContent>
-				</Card>
-			</div>
+			<AllCardsGrid cards={tools} />
 		</div>
 	);
 };

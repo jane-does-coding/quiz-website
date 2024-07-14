@@ -8,11 +8,16 @@ import {
 	CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const ThreeCards = () => {
+	const router = useRouter();
 	return (
 		<div className="flex w-[90vw] mx-auto gap-4">
-			<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3">
+			<Card
+				onClick={() => router.push("/learn")}
+				className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3 cursor-pointer"
+			>
 				<CardHeader>
 					<CardTitle className="jura">Study</CardTitle>
 					<CardDescription>Resources to study different topics</CardDescription>
@@ -25,7 +30,10 @@ const ThreeCards = () => {
 					/>
 				</CardContent>
 			</Card>
-			<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3">
+			<Card
+				onClick={() => router.push("/quizzes")}
+				className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3 cursor-pointer"
+			>
 				<CardHeader>
 					<CardTitle className="jura">Quiz</CardTitle>
 					<CardDescription>Test your knowledge with quizzes</CardDescription>
@@ -38,7 +46,10 @@ const ThreeCards = () => {
 					/>
 				</CardContent>
 			</Card>
-			<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3">
+			<Card
+				onClick={() => router.push("/tools")}
+				className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-1/3 cursor-pointer"
+			>
 				<CardHeader>
 					<CardTitle className="jura">Tools</CardTitle>
 					<CardDescription>Use tools for better understanding</CardDescription>
