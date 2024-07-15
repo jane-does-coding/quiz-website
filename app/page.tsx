@@ -42,7 +42,7 @@ export default async function Home() {
 						transform: "scale(0.8, 1.1)",
 					}}
 				>
-					STUDY BETTER {currentUser?.username}
+					STUDY BETTER
 				</h1>
 
 				<AnimatedTextWord

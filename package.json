@@ -19,6 +19,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dna-rna-converter": "^1.0.2",
     "framer-motion": "^11.3.2",
     "gsap": "^3.12.5",
     "lucide-react": "^0.407.0",

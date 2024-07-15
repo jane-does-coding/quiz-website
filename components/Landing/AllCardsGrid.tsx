@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "../ui/card";
+import { useRouter } from "next/navigation";
 
 const cardVariants = {
 	hidden: { opacity: 0, y: 50 },
@@ -32,6 +33,7 @@ const contentVariants = (delay: number) => ({
 });
 
 const AllCardsGrid = ({ cards }: any) => {
+	const router = useRouter();
 	return (
 		<div className="grid grid-cols-3 gap-4 w-[90vw] mx-auto">
 			{cards.map((card: any, index: number) => (
@@ -42,7 +44,10 @@ const AllCardsGrid = ({ cards }: any) => {
 					animate="visible"
 					variants={cardVariants}
 				>
-					<Card className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full">
+					<Card
+						onClick={() => router.push(card.link ? card.link : "/")}
+						className="bg-white shadow-sm rounded-[0.5rem] border-[1px] border-neutral-200/75 w-full cursor-pointer"
+					>
 						<CardHeader>
 							<motion.div
 								custom={index}

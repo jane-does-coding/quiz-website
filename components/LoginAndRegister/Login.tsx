@@ -1,34 +1,33 @@
 "use client";
-import React from "react";
-import { Button } from "../ui/button";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const Login = () => {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-	});
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
 
-	const onSubmit: SubmitHandler<{ email: string; password: string }> = async (
-		data
-	) => {
-		const result = await signIn("credentials", {
-			...data,
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setIsLoading(true);
+
+		const callback = await signIn("credentials", {
 			redirect: false,
+			email,
+			password,
 		});
 
-		if (result?.ok) {
+		setIsLoading(false);
+
+		if (callback?.ok) {
 			toast.success("Logged in");
-		} else if (result?.error) {
-			toast.error(result.error);
+			router.push("/recipes");
+			router.refresh();
+		} else if (callback?.error) {
+			toast.error(callback.error);
 		}
 	};
 
@@ -38,35 +37,47 @@ const Login = () => {
 				<h2 className="jura text-[3rem] mx-auto text-center mb-6 -mt-8">
 					Login
 				</h2>
-				<form
-					onSubmit={handleSubmit(onSubmit)}
-					className="w-full flex flex-col items-center"
-				>
-					<input
-						type="text"
-						placeholder="Email"
-						{...register("email", { required: "Email is required" })}
-						className="border-none focus:border-none outline-none w-full py-3 px-6 rounded-full mb-6"
-					/>
-					{errors.email && (
-						<span className="text-red-500">{errors.email.message}</span>
-					)}
-					<input
-						type="password"
-						placeholder="Password"
-						{...register("password", { required: "Password is required" })}
-						className="border-none focus:border-none outline-none w-full py-3 px-6 rounded-full mb-6"
-					/>
-					{errors.password && (
-						<span className="text-red-500">{errors.password.message}</span>
-					)}
-					<Button
+				<form onSubmit={handleSubmit} className="gap-2 flex flex-col w-full">
+					<div className="w-full relative my-1">
+						<input
+							id="email"
+							type="text"
+							disabled={isLoading}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							required
+							placeholder="Email"
+							className="border-none focus:border-none outline-none w-full py-3 px-6 rounded-full w-full"
+						/>
+					</div>
+
+					<div className="w-full relative my-1">
+						<input
+							id="password"
+							type="password"
+							disabled={isLoading}
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+							placeholder="Password"
+							className="border-none focus:border-none outline-none w-full py-3 px-6 rounded-full w-full"
+						/>
+					</div>
+
+					<button
 						type="submit"
-						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-6 text-[1.1rem]"
+						disabled={isLoading}
+						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-4 text-[1.1rem]"
 					>
-						Explore More
-					</Button>
+						{isLoading ? "Logging in..." : "Submit"}
+					</button>
 				</form>
+				<div className="mt-4 text-neutral-500 text-sm flex gap-2 text-center items-center justify-center mx-auto">
+					Don&apos;t have an account?{" "}
+					<a href="/register" className="text-neutral-900">
+						Register
+					</a>
+				</div>
 			</div>
 		</div>
 	);

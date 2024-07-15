@@ -9,11 +9,13 @@ const page = () => {
 			title: "Study",
 			description: "Resources to study different topics",
 			imageUrl: "/banner.jpg",
+			link: "/tools/rna-dna",
 		},
 		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
+			title: "BMI Calculator",
+			description: "Calculate your bmi",
 			imageUrl: "/banner.jpg",
+			link: "/tools/bmi",
 		},
 		{
 			title: "Study",
