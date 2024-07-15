@@ -1,17 +1,15 @@
-"use client";
-
 import AnimatedTextWord from "@/components/AnimatedTextWord";
 import CardsGrid from "@/components/Landing/CardsGrid";
 import Circle from "@/components/Landing/Circle";
 import Footer from "@/components/Landing/Footer";
 import ThreeCards from "@/components/Landing/ThreeCards";
 import gsap from "gsap";
-import { useEffect } from "react";
 import Marquee from "react-fast-marquee";
 import SplitType from "split-type";
+import getCurrentUser from "./actions/getCurrentUser";
 
-export default function Home() {
-	useEffect(() => {
+export default async function Home() {
+	/* 	useEffect(() => {
 		const myText = new SplitType("#banner-text", { types: "chars" });
 
 		gsap.to(".char", {
@@ -22,7 +20,10 @@ export default function Home() {
 			delay: 0.2,
 			duration: 0.1,
 		});
-	}, []);
+	}, []); */
+
+	const currentUser = await getCurrentUser();
+	console.log(currentUser);
 
 	return (
 		<div className="bg-gradient-to-b from-neutral-50 to-sky-100">
@@ -38,7 +39,7 @@ export default function Home() {
 						transform: "scale(0.8, 1.1)",
 					}}
 				>
-					STUDY BETTER
+					STUDY BETTER {currentUser?.username}
 				</h1>
 
 				<AnimatedTextWord
