@@ -25,9 +25,6 @@ export default async function Home() {
 		});
 	}, []); */
 
-	const currentUser = await getCurrentUser();
-	console.log(currentUser);
-
 	return (
 		<div className="bg-gradient-to-b from-neutral-50 to-sky-100">
 			<div className="flex flex-col items-center justify-center min-h-screen  p-0 m-0">

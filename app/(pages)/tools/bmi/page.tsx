@@ -28,7 +28,7 @@ const Bmi = () => {
 						Weight (kg):
 					</label>
 					<input
-						className="sheen-input w-full py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400"
+						className="sheen-input w-full py-2 px-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
 						type="number"
 						value={weight}
 						onChange={(e) => setWeight(e.target.value)}
@@ -39,7 +39,7 @@ const Bmi = () => {
 						Height (cm):
 					</label>
 					<input
-						className="sheen-input w-full py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400"
+						className="sheen-input w-full py-2 px-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
 						type="number"
 						value={height}
 						onChange={(e) => setHeight(e.target.value)}

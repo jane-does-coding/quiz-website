@@ -18,9 +18,10 @@ const page = () => {
 			link: "/tools/bmi",
 		},
 		{
-			title: "Study",
+			title: "BMR Calculator",
 			description: "Resources to study different topics",
 			imageUrl: "/banner.jpg",
+			link: "/tools/bmr",
 		},
 		{
 			title: "Review",

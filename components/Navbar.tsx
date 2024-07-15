@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { DrawerComponent } from "./Drawer";
 import { NavComponent } from "./Nav";
 
-const Navbar = () => {
+const Navbar = ({ currentUser }: any) => {
 	return (
 		<motion.div
 			className="w-[80vw] p-4 px-12 bg-neutral-200/45 backdrop-blur-md fixed top-4 left-[10vw] rounded-full border-neutral-200 border-2 z-20 flex"
@@ -14,7 +14,7 @@ const Navbar = () => {
 		>
 			<div className="w-full flex items-center justify-center">
 				{/* ADD JURA FONT */}
-				<NavComponent />
+				<NavComponent currentUser={currentUser} />
 			</div>
 		</motion.div>
 	);

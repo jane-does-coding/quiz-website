@@ -15,23 +15,22 @@ import {
 } from "@/components/ui/navigation-menu";
 import { DrawerComponent } from "./Drawer";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const components: { title: string; href: string; description: string }[] = [
 	{
-		title: "Alert Dialog",
-		href: "/docs/primitives/alert-dialog",
-		description:
-			"A modal dialog that interrupts the user with important content and expects a response.",
+		title: "BMI Calculator",
+		href: "/tools/bmi",
+		description: "Calculate Body Mass Index, and see which is normal",
 	},
 	{
-		title: "Hover Card",
+		title: "BMR Calculator",
 		href: "/docs/primitives/hover-card",
-		description:
-			"For sighted users to preview content available behind a link.",
+		description: "Calculate Basal metabolic rate",
 	},
 	{
-		title: "Progress",
-		href: "/docs/primitives/progress",
+		title: "RNA to DNA",
+		href: "tools/rna-dna",
 		description:
 			"Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
 	},
@@ -54,7 +53,7 @@ const components: { title: string; href: string; description: string }[] = [
 	},
 ];
 
-export function NavComponent() {
+export function NavComponent({ currentUser }: any) {
 	const router = useRouter();
 
 	return (
@@ -141,6 +140,21 @@ export function NavComponent() {
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
+				{currentUser ? (
+					<NavigationMenuItem
+						onClick={() => signOut()}
+						className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem] cursor-pointer"
+					>
+						Logout
+					</NavigationMenuItem>
+				) : (
+					<NavigationMenuItem
+						onClick={() => router.push("/login")}
+						className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem] cursor-pointer"
+					>
+						Login
+					</NavigationMenuItem>
+				)}
 				<NavigationMenuItem>
 					<DrawerComponent />
 				</NavigationMenuItem>
