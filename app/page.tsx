@@ -7,6 +7,9 @@ import gsap from "gsap";
 import Marquee from "react-fast-marquee";
 import SplitType from "split-type";
 import getCurrentUser from "./actions/getCurrentUser";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
+import SignOutBtn from "@/components/SignOutBtn";
 
 export default async function Home() {
 	/* 	useEffect(() => {
@@ -86,6 +89,7 @@ export default async function Home() {
 			<div className=" my-32">
 				<Circle />
 			</div>{" "}
+			<SignOutBtn />
 			<Footer />
 		</div>
 	);
