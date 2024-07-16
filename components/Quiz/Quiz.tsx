@@ -229,10 +229,13 @@ const Quiz = ({
 						value={selectedAnswers[currentQuestionIndex] || ""}
 					>
 						{currentQuestion.choices.map((choice, index) => (
-							<div className="flex items-center justify-start space-x-3">
+							<div
+								className="flex items-center justify-start space-x-3"
+								key={index}
+							>
 								<RadioGroupItem
-									key={index}
-									value={choice}
+									/* 									key={index}
+									 */ value={choice}
 									id={choice}
 									className=""
 								/>
