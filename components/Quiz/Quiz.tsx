@@ -9,6 +9,31 @@ interface Question {
 	correctAnswer: string;
 }
 
+// Function to shuffle an array
+const shuffleArray = <T,>(array: T[]): T[] => {
+	let shuffled = [...array];
+	for (let i = shuffled.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+	}
+	return shuffled;
+};
+
+// Function to create a shuffled question array
+const createShuffledQuestions = (
+	data: typeof MedicalPrefixesData,
+	numQuestions: number
+): Question[] => {
+	// Shuffle questions first
+	const shuffledQuestions = shuffleArray(data).slice(0, numQuestions);
+
+	// Shuffle choices for each question
+	return shuffledQuestions.map((question) => ({
+		...question,
+		choices: shuffleArray(question.choices),
+	}));
+};
+
 const Quiz: React.FC = () => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
@@ -19,7 +44,17 @@ const Quiz: React.FC = () => {
 	const [timerMinutes, setTimerMinutes] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(0);
 
-	const questions = MedicalPrefixesData.slice(0, numQuestions);
+	// Create shuffled questions based on the selected number of questions
+	const [questions, setQuestions] = useState<Question[]>(
+		createShuffledQuestions(MedicalPrefixesData, numQuestions)
+	);
+
+	// Update questions if numQuestions changes
+	useEffect(() => {
+		setQuestions(createShuffledQuestions(MedicalPrefixesData, numQuestions));
+		setCurrentQuestionIndex(0); // Reset to the first question
+		setSelectedAnswers([]); // Reset selected answers
+	}, [numQuestions]);
 
 	const currentQuestion = questions[currentQuestionIndex];
 	const progressValue = ((currentQuestionIndex + 1) / questions.length) * 100;
@@ -60,12 +95,6 @@ const Quiz: React.FC = () => {
 			setTimeLeft(timerMinutes * 60);
 		}
 	};
-
-	/* UHH??? WHAT EVEN IS THAT */
-	/* 
-	useEffect(() => {
-		setCurrentQuestionIndex(currentQuestionIndex);
-	}, [currentQuestionIndex]); */
 
 	useEffect(() => {
 		if (timeLeft > 0) {
@@ -125,7 +154,12 @@ const Quiz: React.FC = () => {
 							))}
 						</select>
 					</div>
-					<button onClick={handleStartQuiz}>Start Quiz</button>
+					<button
+						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem] mt-4"
+						onClick={handleStartQuiz}
+					>
+						Start Quiz
+					</button>
 				</div>
 			</div>
 		);
