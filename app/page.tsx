@@ -10,6 +10,7 @@ import getCurrentUser from "./actions/getCurrentUser";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import SignOutBtn from "@/components/SignOutBtn";
+import BigText from "@/components/Landing/BigText";
 
 export default async function Home() {
 	/* 	useEffect(() => {
@@ -28,7 +29,7 @@ export default async function Home() {
 	return (
 		<div className="bg-gradient-to-b from-neutral-50 to-sky-100">
 			<div className="flex flex-col items-center justify-center min-h-screen  p-0 m-0">
-				<h1
+				{/* <h1
 					id="banner-text"
 					className="text-mask bg-clip-text text-transparent text-[40rem] sixcaps m-0 mb-[4rem] tracking-[-1rem] leading-[40rem] font-extrabold"
 					style={{
@@ -40,7 +41,8 @@ export default async function Home() {
 					}}
 				>
 					STUDY BETTER
-				</h1>
+				</h1> */}
+				<BigText />
 
 				<AnimatedTextWord
 					className="text-[1.75rem] jura"

@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
-import { MedicalPrefixesData } from "@/data/MedicalPrefixesData";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+/* import { QuestionsArray } from "@/data/QuestionsArray";
+ */ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useRouter } from "next/navigation";
 
@@ -22,18 +22,24 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 };
 
 const createShuffledQuestions = (
-	data: typeof MedicalPrefixesData,
+	data: any,
 	numQuestions: number
 ): Question[] => {
 	const shuffledQuestions = shuffleArray(data).slice(0, numQuestions);
 
-	return shuffledQuestions.map((question) => ({
+	return shuffledQuestions.map((question: any) => ({
 		...question,
 		choices: shuffleArray(question.choices),
 	}));
 };
 
-const Quiz: React.FC = () => {
+const Quiz = ({
+	questions: QuestionsArray,
+	title,
+}: {
+	questions: any;
+	title: string;
+}) => {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
 	const [score, setScore] = useState(0);
@@ -44,11 +50,11 @@ const Quiz: React.FC = () => {
 	const [timeLeft, setTimeLeft] = useState(0);
 
 	const [questions, setQuestions] = useState<Question[]>(
-		createShuffledQuestions(MedicalPrefixesData, numQuestions)
+		createShuffledQuestions(QuestionsArray, numQuestions)
 	);
 
 	useEffect(() => {
-		setQuestions(createShuffledQuestions(MedicalPrefixesData, numQuestions));
+		setQuestions(createShuffledQuestions(QuestionsArray, numQuestions));
 		setCurrentQuestionIndex(0);
 		setSelectedAnswers([]);
 	}, [numQuestions]);
@@ -109,7 +115,7 @@ const Quiz: React.FC = () => {
 		setCurrentQuestionIndex(0);
 		setSelectedAnswers([]);
 		setScore(0);
-		setQuestions(createShuffledQuestions(MedicalPrefixesData, numQuestions));
+		setQuestions(createShuffledQuestions(QuestionsArray, numQuestions));
 	};
 
 	const router = useRouter();
@@ -118,7 +124,7 @@ const Quiz: React.FC = () => {
 		return (
 			<div className="w-[100vw] h-screen flex items-center justify-center bg-gradient-to-b from-neutral-50 to-sky-100/75">
 				<div className="w-[45vw] min-h-[60vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col items-center justify-center px-12">
-					<h2 className="jura text-[2.5rem] mb-8">Select Quiz Options</h2>
+					<h2 className="jura text-[2.5rem] mb-8">{title}</h2>
 					<div className="mb-8 w-full">
 						<label
 							htmlFor="num-questions"
@@ -137,7 +143,7 @@ const Quiz: React.FC = () => {
 							<option value={50}>50</option>
 							<option value={100}>100</option>
 							<option value={150}>150</option>
-							<option value={MedicalPrefixesData.length}>All</option>
+							<option value={QuestionsArray.length}>All</option>
 						</select>
 					</div>
 					<div className="mb-8 w-full">
@@ -175,14 +181,14 @@ const Quiz: React.FC = () => {
 	if (isSubmitted) {
 		return (
 			<div className="w-[100vw] h-screen flex items-center justify-center bg-gradient-to-b from-neutral-50 to-sky-100/75">
-				<div className="w-[50vw] min-h-[60vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col items-center justify-center">
+				<div className="w-[50vw] min-h-[60vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col items-center justify-center px-12">
 					<h2 className="text-[1.5rem] mb-4">Quiz Completed!</h2>
 					<p className="text-[1.2rem]">
 						Your score: {score}/{questions.length}
 					</p>
 					<button
 						onClick={handleRestartQuiz}
-						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem]"
+						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem] mt-12"
 					>
 						Restart
 					</button>

@@ -5,74 +5,16 @@ import React from "react";
 const page = () => {
 	const sampleQuizzes = [
 		{
-			title: "Study",
-			description: "Resources to study different topics",
+			title: "Medical Prefixes",
+			description: "Prefixes in Medical Terminology",
 			imageUrl: "/banner.jpg",
+			link: "/quizzes/prefixes",
 		},
 		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
+			title: "Body Systems",
+			description: "Body Systems and their functions",
 			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Study",
-			description: "Resources to study different topics",
-			imageUrl: "/banner.jpg",
-		},
-		{
-			title: "Review",
-			description: "Quick reviews of key concepts",
-			imageUrl: "/banner.jpg",
+			link: "/quizzes/body-systems",
 		},
 	];
 
