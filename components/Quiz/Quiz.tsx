@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
-/* import { QuestionsArray } from "@/data/QuestionsArray";
- */ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useRouter } from "next/navigation";
+import AnimatedTextWord from "../AnimatedTextWord";
+import { motion, useAnimation } from "framer-motion";
 
 interface Question {
 	question: string;
@@ -48,10 +49,39 @@ const Quiz = ({
 	const [numQuestions, setNumQuestions] = useState(10);
 	const [timerMinutes, setTimerMinutes] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(0);
+	const [isFading, setIsFading] = useState(false);
 
 	const [questions, setQuestions] = useState<Question[]>(
 		createShuffledQuestions(QuestionsArray, numQuestions)
 	);
+
+	const animations = {
+		fadeIn: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.3 },
+		},
+		fadeOut: {
+			opacity: 0,
+			y: 20,
+			transition: { duration: 0.3 },
+		},
+	};
+
+	const controls = useAnimation();
+
+	/* 	const handleFade = () => setIsFading(true);
+	 */
+	useEffect(() => {
+		if (isFading) {
+			controls.start("fadeOut").then(() => {
+				setIsFading(false);
+				controls.start("fadeIn");
+			});
+		} else {
+			controls.start("fadeIn");
+		}
+	}, [currentQuestionIndex, isFading]);
 
 	useEffect(() => {
 		setQuestions(createShuffledQuestions(QuestionsArray, numQuestions));
@@ -70,13 +100,21 @@ const Quiz = ({
 
 	const handleNextQuestion = () => {
 		if (currentQuestionIndex < questions.length - 1) {
-			setCurrentQuestionIndex(currentQuestionIndex + 1);
+			setIsFading(true);
+			setTimeout(() => {
+				setCurrentQuestionIndex(currentQuestionIndex + 1);
+				setIsFading(false);
+			}, 300);
 		}
 	};
 
 	const handlePrevQuestion = () => {
 		if (currentQuestionIndex > 0) {
-			setCurrentQuestionIndex(currentQuestionIndex - 1);
+			setIsFading(true);
+			setTimeout(() => {
+				setCurrentQuestionIndex(currentQuestionIndex - 1);
+				setIsFading(false);
+			}, 300);
 		}
 	};
 
@@ -124,14 +162,12 @@ const Quiz = ({
 		return (
 			<div className="w-[100vw] h-screen flex items-center justify-center bg-gradient-to-b from-neutral-50 to-sky-100/75">
 				<div className="w-[45vw] min-h-[60vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col items-center justify-center px-12">
-					<h2 className="jura text-[2.5rem] mb-8">{title}</h2>
+					<AnimatedTextWord text={title} className="jura text-[2.5rem] mb-8" />
 					<div className="mb-8 w-full">
-						<label
-							htmlFor="num-questions"
+						<AnimatedTextWord
+							text="Number of Questions:"
 							className="block mx-auto text-center mb-4 text-[1.25rem] jura"
-						>
-							Number of Questions:
-						</label>
+						/>
 						<select
 							id="num-questions"
 							value={numQuestions}
@@ -147,12 +183,10 @@ const Quiz = ({
 						</select>
 					</div>
 					<div className="mb-8 w-full">
-						<label
-							htmlFor="timer"
+						<AnimatedTextWord
+							text="Set Timer (minutes):"
 							className="block mx-auto text-center mb-4 text-[1.25rem] jura"
-						>
-							Set Timer (minutes):
-						</label>
+						/>
 						<select
 							id="timer"
 							value={timerMinutes}
@@ -220,7 +254,13 @@ const Quiz = ({
 					</div>
 				)}
 				<h2 className="w-[90%] jura mx-auto mt-6 text-[1.3rem] pb-6 border-b-[1px] border-neutral-200">
-					{currentQuestion.question}
+					<div
+						className={`transition-opacity duration-300 ${
+							isFading ? "fade-out" : "fade-in"
+						}`}
+					>
+						{currentQuestion.question}
+					</div>
 				</h2>
 				<div className="w-[90%] mx-auto">
 					<RadioGroup
@@ -229,20 +269,17 @@ const Quiz = ({
 						value={selectedAnswers[currentQuestionIndex] || ""}
 					>
 						{currentQuestion.choices.map((choice, index) => (
-							<div
-								className="flex items-center justify-start space-x-3"
+							<motion.div
 								key={index}
+								variants={animations}
+								initial="fadeIn"
+								animate={controls}
 							>
-								<RadioGroupItem
-									/* 									key={index}
-									 */ value={choice}
-									id={choice}
-									className=""
-								/>
+								<RadioGroupItem value={choice} id={choice} className="" />
 								<Label htmlFor={choice} className="jura text-[1.25rem] my-2">
 									{choice}
 								</Label>
-							</div>
+							</motion.div>
 						))}
 					</RadioGroup>
 				</div>
