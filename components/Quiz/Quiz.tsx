@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { MedicalPrefixesData } from "@/data/MedicalPrefixesData";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Label } from "../ui/label";
+import { useRouter } from "next/navigation";
 
 interface Question {
 	question: string;
@@ -9,7 +12,6 @@ interface Question {
 	correctAnswer: string;
 }
 
-// Function to shuffle an array
 const shuffleArray = <T,>(array: T[]): T[] => {
 	let shuffled = [...array];
 	for (let i = shuffled.length - 1; i > 0; i--) {
@@ -19,15 +21,12 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 	return shuffled;
 };
 
-// Function to create a shuffled question array
 const createShuffledQuestions = (
 	data: typeof MedicalPrefixesData,
 	numQuestions: number
 ): Question[] => {
-	// Shuffle questions first
 	const shuffledQuestions = shuffleArray(data).slice(0, numQuestions);
 
-	// Shuffle choices for each question
 	return shuffledQuestions.map((question) => ({
 		...question,
 		choices: shuffleArray(question.choices),
@@ -44,21 +43,18 @@ const Quiz: React.FC = () => {
 	const [timerMinutes, setTimerMinutes] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(0);
 
-	// Create shuffled questions based on the selected number of questions
 	const [questions, setQuestions] = useState<Question[]>(
 		createShuffledQuestions(MedicalPrefixesData, numQuestions)
 	);
 
-	// Update questions if numQuestions changes
 	useEffect(() => {
 		setQuestions(createShuffledQuestions(MedicalPrefixesData, numQuestions));
-		setCurrentQuestionIndex(0); // Reset to the first question
-		setSelectedAnswers([]); // Reset selected answers
+		setCurrentQuestionIndex(0);
+		setSelectedAnswers([]);
 	}, [numQuestions]);
 
 	const currentQuestion = questions[currentQuestionIndex];
 	const progressValue = ((currentQuestionIndex + 1) / questions.length) * 100;
-	console.log(progressValue);
 
 	const handleAnswerSelect = (choice: string) => {
 		const updatedAnswers = [...selectedAnswers];
@@ -106,6 +102,17 @@ const Quiz: React.FC = () => {
 			handleSubmit();
 		}
 	}, [timeLeft]);
+
+	const handleRestartQuiz = () => {
+		setIsSubmitted(false);
+		setIsQuizStarted(false);
+		setCurrentQuestionIndex(0);
+		setSelectedAnswers([]);
+		setScore(0);
+		setQuestions(createShuffledQuestions(MedicalPrefixesData, numQuestions));
+	};
+
+	const router = useRouter();
 
 	if (!isQuizStarted) {
 		return (
@@ -173,6 +180,12 @@ const Quiz: React.FC = () => {
 					<p className="text-[1.2rem]">
 						Your score: {score}/{questions.length}
 					</p>
+					<button
+						onClick={handleRestartQuiz}
+						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem]"
+					>
+						Restart
+					</button>
 				</div>
 			</div>
 		);
@@ -180,7 +193,7 @@ const Quiz: React.FC = () => {
 
 	return (
 		<div className="w-[100vw] h-screen flex items-center justify-center bg-gradient-to-b from-neutral-50 to-sky-100/75">
-			<div className="w-[50vw] min-h-[60vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col">
+			<div className="w-[50vw] min-h-[40vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col">
 				<div className="w-[90%] mx-auto flex items-center justify-center gap-4 mt-8">
 					<Progress
 						value={progressValue}
@@ -204,19 +217,25 @@ const Quiz: React.FC = () => {
 					{currentQuestion.question}
 				</h2>
 				<div className="w-[90%] mx-auto">
-					{currentQuestion.choices.map((choice, index) => (
-						<div key={index} className="flex items-center space-x-2">
-							<input
-								type="radio"
-								id={`choice-${index}`}
-								name="choices"
-								value={choice}
-								checked={selectedAnswers[currentQuestionIndex] === choice}
-								onChange={() => handleAnswerSelect(choice)}
-							/>
-							<label htmlFor={`choice-${index}`}>{choice}</label>
-						</div>
-					))}
+					<RadioGroup
+						onValueChange={(value) => handleAnswerSelect(value)}
+						className="my-6 mb-12"
+						value={selectedAnswers[currentQuestionIndex] || ""}
+					>
+						{currentQuestion.choices.map((choice, index) => (
+							<div className="flex items-center justify-start space-x-3">
+								<RadioGroupItem
+									key={index}
+									value={choice}
+									id={choice}
+									className=""
+								/>
+								<Label htmlFor={choice} className="jura text-[1.25rem] my-2">
+									{choice}
+								</Label>
+							</div>
+						))}
+					</RadioGroup>
 				</div>
 				<div className="w-[90%] mx-auto mt-auto mb-4 flex justify-between gap-4">
 					<button
