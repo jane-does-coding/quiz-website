@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useRouter } from "next/navigation";
 import AnimatedTextWord from "../AnimatedTextWord";
 import { motion, useAnimation } from "framer-motion";
+import { Progress } from "../ui/progress";
 
 interface Question {
 	question: string;
@@ -235,14 +235,15 @@ const Quiz = ({
 		<div className="w-[100vw] h-screen flex items-center justify-center bg-gradient-to-b from-neutral-50 to-sky-100/75">
 			<div className="w-[50vw] min-h-[40vh] bg-white/75 border-[1px] border-neutral-200 mx-auto rounded-[1rem] flex flex-col">
 				<div className="w-[90%] mx-auto flex items-center justify-center gap-4 mt-8">
-					<Progress
-						value={progressValue}
-						className="bg-neutral-100 h-[1.5rem]"
-					/>
+					<Progress value={((currentQuestionIndex + 1) / numQuestions) * 100} />
 					<p className="flex items-center justify-center">{`${
 						currentQuestionIndex + 1
 					}/${questions.length}`}</p>
 				</div>
+				{/* The percentage */}
+				{/* 				{(currentQuestionIndex / numQuestions) * 100}
+				 */}{" "}
+				{/* The percentage */}
 				{timerMinutes > 0 && (
 					<div className="w-[90%] mx-auto flex items-center justify-center mt-4">
 						<p className="text-[1rem]">
@@ -254,13 +255,9 @@ const Quiz = ({
 					</div>
 				)}
 				<h2 className="w-[90%] jura mx-auto mt-6 text-[1.3rem] pb-6 border-b-[1px] border-neutral-200">
-					<div
-						className={`transition-opacity duration-300 ${
-							isFading ? "fade-out" : "fade-in"
-						}`}
-					>
+					<motion.div variants={animations} initial="fadeIn" animate={controls}>
 						{currentQuestion.question}
-					</div>
+					</motion.div>
 				</h2>
 				<div className="w-[90%] mx-auto">
 					<RadioGroup
@@ -274,6 +271,7 @@ const Quiz = ({
 								variants={animations}
 								initial="fadeIn"
 								animate={controls}
+								className="flex space-x-3 items-center justify-start"
 							>
 								<RadioGroupItem value={choice} id={choice} className="" />
 								<Label htmlFor={choice} className="jura text-[1.25rem] my-2">

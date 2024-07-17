@@ -1,10 +1,12 @@
 import Quiz from "@/components/Quiz/Quiz";
+import { DnaRnaData } from "@/data/DnaRna";
 import React from "react";
 
 const page = () => {
+	const questions = DnaRnaData;
 	return (
 		<>
-			<h2>hey</h2>
+			<Quiz questions={questions} title="DNA RNA Quiz" />
 		</>
 	);
 };
