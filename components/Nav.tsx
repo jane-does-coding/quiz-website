@@ -59,6 +59,13 @@ export function NavComponent({ currentUser }: any) {
 	return (
 		<NavigationMenu className="w-fit flex items-center justify-between">
 			<NavigationMenuList className="justify-between  flex items-center gap-12">
+				<NavigationMenuItem
+					onClick={() => router.push("/")}
+					className="jura font-bold transition-all hover:scale-[0.8] text-[1.25rem] cursor-pointer mr-4"
+				>
+					Home
+				</NavigationMenuItem>
+
 				<NavigationMenuItem>
 					<NavigationMenuTrigger
 						onClick={() => router.push("/quizzes")}
@@ -74,8 +81,6 @@ export function NavComponent({ currentUser }: any) {
 										className="flex h-full w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
 										href="/"
 									>
-										{/* 										<Icons.logo className="h-6 w-6" />
-										 */}{" "}
 										<div className="mb-2 mt-4 text-lg font-medium">
 											Find Quizzes
 										</div>
@@ -86,14 +91,14 @@ export function NavComponent({ currentUser }: any) {
 									</a>
 								</NavigationMenuLink>
 							</li>
-							<ListItem href="/docs" title="Introduction">
-								Re-usable components built using Radix UI and Tailwind CSS.
+							<ListItem href="/quizzes/prefixes" title="Medical Prefixes">
+								Prefixes in Medical Terminology
 							</ListItem>
-							<ListItem href="/docs/installation" title="Installation">
-								How to install dependencies and structure your app.
+							<ListItem href="/quizzes/body-systems" title="Body Systems">
+								Body Systems and their funcitons
 							</ListItem>
-							<ListItem href="/docs/primitives/typography" title="Typography">
-								Styles for headings, paragraphs, lists...etc
+							<ListItem href="/quizzes/dna-rna" title="DNA RNA">
+								Some RNA DNA quiz
 							</ListItem>
 						</ul>
 					</NavigationMenuContent>
@@ -155,9 +160,9 @@ export function NavComponent({ currentUser }: any) {
 						Login
 					</NavigationMenuItem>
 				)}
-				<NavigationMenuItem>
+				{/* <NavigationMenuItem>
 					<DrawerComponent />
-				</NavigationMenuItem>
+				</NavigationMenuItem> */}
 			</NavigationMenuList>
 		</NavigationMenu>
 	);

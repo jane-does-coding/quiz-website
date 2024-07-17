@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import AnimatedTextWord from "../AnimatedTextWord";
 import { motion, useAnimation } from "framer-motion";
 import { Progress } from "../ui/progress";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface Question {
 	question: string;
@@ -70,8 +72,6 @@ const Quiz = ({
 
 	const controls = useAnimation();
 
-	/* 	const handleFade = () => setIsFading(true);
-	 */
 	useEffect(() => {
 		if (isFading) {
 			controls.start("fadeOut").then(() => {
@@ -240,10 +240,6 @@ const Quiz = ({
 						currentQuestionIndex + 1
 					}/${questions.length}`}</p>
 				</div>
-				{/* The percentage */}
-				{/* 				{(currentQuestionIndex / numQuestions) * 100}
-				 */}{" "}
-				{/* The percentage */}
 				{timerMinutes > 0 && (
 					<div className="w-[90%] mx-auto flex items-center justify-center mt-4">
 						<p className="text-[1rem]">
@@ -285,16 +281,18 @@ const Quiz = ({
 					<button
 						onClick={handlePrevQuestion}
 						disabled={currentQuestionIndex === 0}
-						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem]"
+						className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem] flex items-center justify-center gap-2"
 					>
+						<IoIosArrowBack size={24} />
 						Previous
 					</button>
 					{currentQuestionIndex < questions.length - 1 ? (
 						<button
 							onClick={handleNextQuestion}
-							className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem]"
+							className="w-full bg-blue-200 hover:bg-blue-300/75 rounded-full py-3 text-[1.1rem] flex items-center justify-center gap-2"
 						>
 							Next
+							<IoIosArrowForward size={24} />
 						</button>
 					) : (
 						<button

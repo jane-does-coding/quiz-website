@@ -16,6 +16,12 @@ const page = () => {
 			imageUrl: "/banner.jpg",
 			link: "/quizzes/body-systems",
 		},
+		{
+			title: "DNA RNA Quiz",
+			description: "knowledge related to DNA and RNA",
+			imageUrl: "/banner.jpg",
+			link: "/quizzes/dna-rna",
+		},
 	];
 
 	return (
